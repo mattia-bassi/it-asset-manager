@@ -1,0 +1,131 @@
+{
+    "stepper": {
+        "network": "Rete",
+        "database": "Database",
+        "admin": "Admin",
+        "summary": "Riepilogo",
+        "install": "Installazione",
+        "complete": "Completato"
+    },
+    "common": {
+        "back": "Indietro",
+        "next": "Avanti",
+        "cancel": "Annulla",
+        "required": "Questo campo è obbligatorio"
+    },
+    "login": {
+        "title": "Accesso Configurazione Iniziale",
+        "description": "Inserisci le credenziali di primo avvio riportate nella documentazione ufficiale.",
+        "username": "Nome utente",
+        "password": "Password",
+        "submit": "Accedi",
+        "error": "Credenziali non valide. Controlla la Guida all'Installazione."
+    },
+    "network": {
+        "title": "Configurazione Rete",
+        "description": "Configura gli indirizzi IP per i servizi. Usa la modalità automatica per rilevare la rete.",
+        "info_title": "Come funziona?",
+        "info_text": "Il sistema usa una rete macvlan per assegnare IP dedicati a ogni servizio. Ogni componente sarà raggiungibile come un dispositivo fisico sulla tua rete.",
+        "mode_auto": "Automatica",
+        "mode_manual": "Manuale",
+        "auto_detected": "Rete rilevata automaticamente",
+        "interface": "Interfaccia di rete",
+        "subnet": "Subnet",
+        "gateway": "Gateway",
+        "ip_app": "IP Applicazione",
+        "ip_db": "IP Database",
+        "ip_redis": "IP Cache (Redis)",
+        "port": "Porta applicazione",
+        "protocol": "Protocollo",
+        "error_required": "Campo obbligatorio",
+        "error_ip": "Indirizzo IP non valido",
+        "error_subnet": "Formato subnet non valido (es. 10.0.0.0/24)",
+        "error_port": "La porta deve essere tra 1024 e 65535",
+        "error_duplicate": "Ogni servizio deve avere un IP diverso",
+        "error_ip_in_use": "Questo indirizzo è già in uso da un altro dispositivo"
+    },
+    "database": {
+        "title": "Credenziali Database",
+        "description": "Configura nome database, utente applicativo e password di amministrazione.",
+        "info_title": "Cosa stai configurando?",
+        "info_text": "Il database MariaDB memorizza tutti i dati dell'applicazione. L'utente applicativo ha accesso limitato al solo database, mentre l'utente root è riservato all'amministrazione.",
+        "db_name": "Nome database",
+        "db_user": "Utente applicativo",
+        "db_password": "Password utente applicativo",
+        "root_password": "Password root (amministratore DB)",
+        "error_name": "Almeno 2 caratteri",
+        "error_user": "Almeno 2 caratteri",
+        "error_password": "La password non soddisfa i requisiti",
+        "error_root_password": "La password non soddisfa i requisiti",
+        "error_same_password": "La password root deve essere diversa da quella applicativa"
+    },
+    "admin": {
+        "title": "Account Amministratore",
+        "description": "Crea il primo account amministratore per accedere al sistema.",
+        "first_name": "Nome",
+        "last_name": "Cognome",
+        "email": "Email",
+        "username": "Nome utente",
+        "password_label": "Password",
+        "password_confirm": "Conferma password",
+        "password": "Password",
+        "error_firstname": "Almeno 2 caratteri",
+        "error_lastname": "Almeno 2 caratteri",
+        "error_email": "Email non valida",
+        "error_username": "Min 4 caratteri, lettere/numeri/punti/underscore",
+        "error_weak_password": "La password non soddisfa i requisiti",
+        "error_password_mismatch": "Le password non coincidono"
+    },
+    "password": {
+        "min_length": "Min 12 caratteri",
+        "uppercase": "Maiuscola",
+        "lowercase": "Minuscola",
+        "number": "Numero",
+        "symbol": "Simbolo",
+        "weak": "Debole",
+        "medium": "Media",
+        "strong": "Forte"
+    },
+    "summary": {
+        "title": "Riepilogo Configurazione",
+        "description": "Verifica i dati prima di avviare l'installazione. Puoi tornare indietro per modificare.",
+        "section_network": "Rete",
+        "section_database": "Database",
+        "section_admin": "Amministratore",
+        "url": "URL di accesso",
+        "include_password": "Includi password nel documento",
+        "download": "Scarica documento configurazione",
+        "start_install": "Avvia Installazione",
+        "confirm_title": "Conferma installazione",
+        "confirm_text": "Stai per avviare l'installazione. I container Docker verranno creati e configurati. Vuoi procedere?",
+        "confirm_start": "Conferma e Installa"
+    },
+    "install": {
+        "title": "Installazione in corso",
+        "preparing": "Preparazione...",
+        "log_title": "Log installazione",
+        "error_title": "Errore durante l'installazione",
+        "retry": "Riprova",
+        "log_init": "Inizializzazione installazione...",
+        "log_init_ok": "Inizializzazione completata",
+        "log_init_fail": "Errore inizializzazione",
+        "log_complete": "🎉 Installazione completata con successo!",
+        "log_retry": "Riprovo dallo step fallito...",
+        "log_connection_error": "Errore di connessione"
+    },
+    "complete": {
+        "title": "Installazione completata!",
+        "description": "Il sistema è pronto all'uso. Accedi con le credenziali create durante la configurazione.",
+        "url": "Indirizzo",
+        "username": "Utente",
+        "open_app": "Apri l'applicazione"
+    },
+    "document": {
+        "title": "CONFIGURAZIONE SISTEMA",
+        "confidential": "DOCUMENTO RISERVATO — Conservare in un luogo sicuro",
+        "install_date": "Data installazione",
+        "version": "Versione applicazione",
+        "full_name": "Nome completo",
+        "not_included": "non incluso"
+    }
+}

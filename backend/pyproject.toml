@@ -1,0 +1,32 @@
+[project]
+name = "asset-management-backend"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = [
+  "fastapi>=0.110",
+  "uvicorn[standard]>=0.27",
+  "pydantic>=2.6",
+  "pydantic-settings>=2.2",
+  "SQLAlchemy>=2.0",
+  "alembic>=1.13",
+  "PyMySQL>=1.1",
+  "python-jose[cryptography]>=3.3",
+  "passlib[argon2]>=1.7.4",
+  "argon2-cffi>=23.1.0",
+  "python-multipart>=0.0.9",
+  "email-validator>=2.0.0",
+  "fpdf2>=2.7.0",
+  "slowapi>=0.1.9",
+  "redis>=4.0",
+  "openpyxl>=3.1.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=7.4.0",
+  "httpx>=0.25.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

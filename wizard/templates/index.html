@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT Asset Manager — Setup Wizard</title>
+    <link rel="stylesheet" href="/static/css/wizard.css">
+</head>
+<body>
+    <div class="wizard-container">
+        <!-- Stepper bar (hidden on step 0, 1, 7) -->
+        <div id="wizard-stepper" class="wizard-stepper hidden">
+            <!-- 6 step indicators for steps 2-7 -->
+            <div class="step completed" data-step="2"><span class="step-number">1</span><span class="step-label" data-i18n="stepper.network">Rete</span></div>
+            <div class="step-connector"></div>
+            <div class="step" data-step="3"><span class="step-number">2</span><span class="step-label" data-i18n="stepper.database">Database</span></div>
+            <div class="step-connector"></div>
+            <div class="step" data-step="4"><span class="step-number">3</span><span class="step-label" data-i18n="stepper.admin">Admin</span></div>
+            <div class="step-connector"></div>
+            <div class="step" data-step="5"><span class="step-number">4</span><span class="step-label" data-i18n="stepper.summary">Riepilogo</span></div>
+            <div class="step-connector"></div>
+            <div class="step" data-step="6"><span class="step-number">5</span><span class="step-label" data-i18n="stepper.install">Installazione</span></div>
+            <div class="step-connector"></div>
+            <div class="step" data-step="7"><span class="step-number">6</span><span class="step-label" data-i18n="stepper.complete">Completato</span></div>
+        </div>
+
+        <!-- Step 0 — Selezione lingua (NON hidden) -->
+        <div id="step-0" class="wizard-step">
+            <div class="wizard-card centered">
+                <div class="wizard-logo">
+                    <h1>IT Asset Manager</h1>
+                    <p class="subtitle">Bootstrap Wizard v2.7.4</p>
+                </div>
+                <p class="wizard-text">Select your language / Seleziona la lingua</p>
+                <div class="language-buttons">
+                    <button class="btn-language" onclick="WizardApp.setLanguage('it')">🇮🇹 Italiano</button>
+                    <button class="btn-language" onclick="WizardApp.setLanguage('en')">🇬🇧 English</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 1 — Login -->
+        <div id="step-1" class="wizard-step hidden">
+            <div class="wizard-card centered">
+                <h2 data-i18n="login.title">Accesso Setup</h2>
+                <p class="wizard-text" data-i18n="login.description">Inserisci le credenziali di primo avvio riportate nella documentazione.</p>
+                <div class="wizard-form">
+                    <div class="form-group">
+                        <label for="login-username" data-i18n="login.username">Nome utente</label>
+                        <input type="text" id="login-username" class="wizard-input" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password" data-i18n="login.password">Password</label>
+                        <input type="password" id="login-password" class="wizard-input">
+                    </div>
+                    <div id="login-error" class="wizard-error hidden" data-i18n="login.error">Credenziali non valide.</div>
+                    <button class="btn-primary" onclick="WizardApp.login()" data-i18n="login.submit">Accedi</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 2 — Configurazione rete -->
+        <div id="step-2" class="wizard-step hidden">
+            <div class="wizard-card">
+                <h2 data-i18n="network.title">Configurazione Rete</h2>
+                <p class="wizard-text" data-i18n="network.description">Configura gli indirizzi IP per i servizi. Usa la modalità automatica per rilevare la rete.</p>
+
+                <!-- Info box -->
+                <div class="wizard-info-box">
+                    <h4 data-i18n="network.info_title">Come funziona?</h4>
+                    <p data-i18n="network.info_text">Il sistema usa una rete macvlan per assegnare IP dedicati a ogni servizio. Ogni componente sarà raggiungibile come un dispositivo fisico sulla tua rete.</p>
+                </div>
+
+                <!-- Auto/Manual toggle -->
+                <div id="network-mode-toggle" class="toggle-group">
+                    <button class="toggle-btn active" onclick="WizardApp.setNetworkMode('auto')" data-i18n="network.mode_auto">Automatica</button>
+                    <button class="toggle-btn" onclick="WizardApp.setNetworkMode('manual')" data-i18n="network.mode_manual">Manuale</button>
+                </div>
+
+                <div id="network-auto-status" class="wizard-status hidden">
+                    <span class="status-icon">✅</span>
+                    <span data-i18n="network.auto_detected">Rete rilevata automaticamente</span>
+                </div>
+
+                <div class="wizard-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="net-interface" data-i18n="network.interface">Interfaccia di rete</label>
+                            <input type="text" id="net-interface" class="wizard-input" placeholder="eno1">
+                            <div id="net-interface-error" class="field-error hidden"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="net-subnet" data-i18n="network.subnet">Subnet</label>
+                            <input type="text" id="net-subnet" class="wizard-input" placeholder="10.20.0.0/24">
+                            <div id="net-subnet-error" class="field-error hidden"></div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="net-gateway" data-i18n="network.gateway">Gateway</label>
+                            <input type="text" id="net-gateway" class="wizard-input" placeholder="10.20.0.1">
+                            <div id="net-gateway-error" class="field-error hidden"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="net-port" data-i18n="network.port">Porta applicazione</label>
+                            <input type="number" id="net-port" class="wizard-input" value="8000" min="1024" max="65535">
+                            <div id="net-port-error" class="field-error hidden"></div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="net-ip-app" data-i18n="network.ip_app">IP Applicazione</label>
+                            <input type="text" id="net-ip-app" class="wizard-input" placeholder="10.20.0.210">
+                            <div id="net-ip-app-error" class="field-error hidden"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="net-ip-db" data-i18n="network.ip_db">IP Database</label>
+                            <input type="text" id="net-ip-db" class="wizard-input" placeholder="10.20.0.211">
+                            <div id="net-ip-db-error" class="field-error hidden"></div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="net-ip-redis" data-i18n="network.ip_redis">IP Cache (Redis)</label>
+                            <input type="text" id="net-ip-redis" class="wizard-input" placeholder="10.20.0.212">
+                            <div id="net-ip-redis-error" class="field-error hidden"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="net-protocol" data-i18n="network.protocol">Protocollo</label>
+                            <select id="net-protocol" class="wizard-input">
+                                <option value="http">HTTP</option>
+                                <option value="https">HTTPS</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="wizard-nav">
+                        <span></span>
+                        <button class="btn-primary" onclick="WizardApp.validateAndNext(2)" data-i18n="common.next">Avanti</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 3 — Credenziali database -->
+        <div id="step-3" class="wizard-step hidden">
+            <div class="wizard-card">
+                <h2 data-i18n="database.title">Credenziali Database</h2>
+                <p class="wizard-text" data-i18n="database.description">Configura nome database, utente applicativo e password di amministrazione.</p>
+
+                <div class="wizard-info-box">
+                    <h4 data-i18n="database.info_title">Cosa stai configurando?</h4>
+                    <p data-i18n="database.info_text">Il database MariaDB memorizza tutti i dati dell'applicazione. L'utente applicativo ha accesso limitato al solo database, mentre l'utente root è riservato all'amministrazione.</p>
+                </div>
+
+                <div class="wizard-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="db-name" data-i18n="database.db_name">Nome database</label>
+                            <input type="text" id="db-name" class="wizard-input" value="assetdb">
+                            <div id="db-name-error" class="field-error hidden"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="db-user" data-i18n="database.db_user">Utente applicativo</label>
+                            <input type="text" id="db-user" class="wizard-input" value="assetapp">
+                            <div id="db-user-error" class="field-error hidden"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="db-password" data-i18n="database.db_password">Password utente applicativo</label>
+                        <input type="password" id="db-password" class="wizard-input">
+                        <div class="wizard-password-strength" id="db-password-strength"></div>
+                        <span class="wizard-password-strength-label" id="db-password-strength-label"></span>
+                        <div id="db-password-checklist" class="wizard-password-checklist">
+                            <span class="check-item" data-check="length" data-i18n="password.min_length">Min 12 caratteri</span>
+                            <span class="check-item" data-check="upper" data-i18n="password.uppercase">Maiuscola</span>
+                            <span class="check-item" data-check="lower" data-i18n="password.lowercase">Minuscola</span>
+                            <span class="check-item" data-check="number" data-i18n="password.number">Numero</span>
+                            <span class="check-item" data-check="symbol" data-i18n="password.symbol">Simbolo</span>
+                        </div>
+                        <div id="db-password-error" class="field-error hidden"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="db-root-password" data-i18n="database.root_password">Password root (amministratore DB)</label>
+                        <input type="password" id="db-root-password" class="wizard-input">
+                        <div class="wizard-password-strength" id="db-root-strength"></div>
+                        <span class="wizard-password-strength-label" id="db-root-strength-label"></span>
+                        <div id="db-root-checklist" class="wizard-password-checklist">
+                            <span class="check-item" data-check="length" data-i18n="password.min_length">Min 12 caratteri</span>
+                            <span class="check-item" data-check="upper" data-i18n="password.uppercase">Maiuscola</span>
+                            <span class="check-item" data-check="lower" data-i18n="password.lowercase">Minuscola</span>
+                            <span class="check-item" data-check="number" data-i18n="password.number">Numero</span>
+                            <span class="check-item" data-check="symbol" data-i18n="password.symbol">Simbolo</span>
+                        </div>
+                        <div id="db-root-password-error" class="field-error hidden"></div>
+                    </div>
+                    <div class="wizard-nav">
+                        <button class="btn-secondary" onclick="WizardApp.goToStep(2)" data-i18n="common.back">Indietro</button>
+                        <button class="btn-primary" onclick="WizardApp.validateAndNext(3)" data-i18n="common.next">Avanti</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 4 — Account admin -->
+        <div id="step-4" class="wizard-step hidden">
+            <div class="wizard-card">
+                <h2 data-i18n="admin.title">Account Amministratore</h2>
+                <p class="wizard-text" data-i18n="admin.description">Crea il primo account amministratore per accedere al sistema.</p>
+
+                <div class="wizard-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="admin-firstname" data-i18n="admin.first_name">Nome</label>
+                            <input type="text" id="admin-firstname" class="wizard-input" oninput="WizardApp.suggestUsername()">
+                            <div id="admin-firstname-error" class="field-error hidden"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="admin-lastname" data-i18n="admin.last_name">Cognome</label>
+                            <input type="text" id="admin-lastname" class="wizard-input" oninput="WizardApp.suggestUsername()">
+                            <div id="admin-lastname-error" class="field-error hidden"></div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="admin-email" data-i18n="admin.email">Email</label>
+                            <input type="email" id="admin-email" class="wizard-input">
+                            <div id="admin-email-error" class="field-error hidden"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="admin-username" data-i18n="admin.username">Nome utente</label>
+                            <input type="text" id="admin-username" class="wizard-input">
+                            <div id="admin-username-error" class="field-error hidden"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="admin-password" data-i18n="admin.password_label">Password</label>
+                        <input type="password" id="admin-password" class="wizard-input">
+                        <div class="wizard-password-strength" id="admin-password-strength"></div>
+                        <span class="wizard-password-strength-label" id="admin-password-strength-label"></span>
+                        <div id="admin-password-checklist" class="wizard-password-checklist">
+                            <span class="check-item" data-check="length" data-i18n="password.min_length">Min 12 caratteri</span>
+                            <span class="check-item" data-check="upper" data-i18n="password.uppercase">Maiuscola</span>
+                            <span class="check-item" data-check="lower" data-i18n="password.lowercase">Minuscola</span>
+                            <span class="check-item" data-check="number" data-i18n="password.number">Numero</span>
+                            <span class="check-item" data-check="symbol" data-i18n="password.symbol">Simbolo</span>
+                        </div>
+                        <div id="admin-password-error" class="field-error hidden"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="admin-password-confirm" data-i18n="admin.password_confirm">Conferma password</label>
+                        <input type="password" id="admin-password-confirm" class="wizard-input">
+                        <div id="admin-password-confirm-error" class="field-error hidden"></div>
+                    </div>
+                    <div class="wizard-nav">
+                        <button class="btn-secondary" onclick="WizardApp.goToStep(3)" data-i18n="common.back">Indietro</button>
+                        <button class="btn-primary" onclick="WizardApp.validateAndNext(4)" data-i18n="common.next">Avanti</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 5 — Riepilogo -->
+        <div id="step-5" class="wizard-step hidden">
+            <div class="wizard-card">
+                <h2 data-i18n="summary.title">Riepilogo Configurazione</h2>
+                <p class="wizard-text" data-i18n="summary.description">Verifica i dati prima di avviare l'installazione. Puoi tornare indietro per modificare.</p>
+
+                <div id="summary-content" class="wizard-summary"></div>
+
+                <div class="wizard-summary-actions">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="summary-include-password">
+                        <span data-i18n="summary.include_password">Includi password nel documento</span>
+                    </label>
+                    <button class="btn-outline" onclick="WizardApp.downloadConfig()" data-i18n="summary.download">Scarica documento configurazione</button>
+                </div>
+
+                <div class="wizard-nav">
+                    <button class="btn-secondary" onclick="WizardApp.goToStep(4)" data-i18n="common.back">Indietro</button>
+                    <button class="btn-primary btn-install" onclick="WizardApp.confirmInstall()" data-i18n="summary.start_install">Avvia Installazione</button>
+                </div>
+            </div>
+
+            <!-- Confirm Modal -->
+            <div id="confirm-modal" class="wizard-modal">
+                <div class="modal-content">
+                    <h3 data-i18n="summary.confirm_title">Conferma installazione</h3>
+                    <p data-i18n="summary.confirm_text">Stai per avviare l'installazione. I container Docker verranno creati e configurati. Vuoi procedere?</p>
+                    <div class="modal-actions">
+                        <button class="btn-secondary" onclick="WizardApp.closeModal()" data-i18n="common.cancel">Annulla</button>
+                        <button class="btn-primary" onclick="WizardApp.startInstall()" data-i18n="summary.confirm_start">Conferma e Installa</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 6 — Installazione live -->
+        <div id="step-6" class="wizard-step hidden">
+            <div class="wizard-card">
+                <h2 data-i18n="install.title">Installazione in corso</h2>
+
+                <!-- Progress bar -->
+                <div class="install-progress">
+                    <div class="install-progress-bar">
+                        <div id="install-progress-fill" class="install-progress-fill" style="width: 0%"></div>
+                    </div>
+                    <div class="install-progress-info">
+                        <span id="install-progress-step" data-i18n="install.preparing">Preparazione...</span>
+                        <span id="install-progress-percent">0%</span>
+                    </div>
+                </div>
+
+                <!-- Step list with status indicators -->
+                <div id="install-steps-list" class="install-steps-list">
+                    <!-- Populated by JS with 22 step rows -->
+                </div>
+
+                <!-- Log console -->
+                <div class="install-log-container">
+                    <h4 data-i18n="install.log_title">Log installazione</h4>
+                    <div id="install-log" class="install-log"></div>
+                </div>
+
+                <!-- Error box -->
+                <div id="install-error" class="wizard-error-box hidden">
+                    <h4 data-i18n="install.error_title">Errore durante l'installazione</h4>
+                    <p id="install-error-message"></p>
+                    <button class="btn-primary" onclick="WizardApp.retryInstall()" data-i18n="install.retry">Riprova</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 7 — Completamento -->
+        <div id="step-7" class="wizard-step hidden">
+            <div class="wizard-card centered">
+                <div class="completion-icon">✅</div>
+                <h2 data-i18n="complete.title">Installazione completata!</h2>
+                <p class="wizard-text" data-i18n="complete.description">Il sistema è pronto all'uso. Accedi con le credenziali create durante la configurazione.</p>
+
+                <div class="completion-details">
+                    <div class="completion-row">
+                        <span class="label" data-i18n="complete.url">Indirizzo</span>
+                        <a id="completion-link" href="#" target="_blank"><span id="completion-url"></span></a>
+                    </div>
+                    <div class="completion-row">
+                        <span class="label" data-i18n="complete.username">Utente</span>
+                        <span id="completion-username" class="value"></span>
+                    </div>
+                </div>
+
+                <div class="completion-actions">
+                    <button id="completion-open" class="btn-primary" onclick="WizardApp.openApp()" data-i18n="complete.open_app">Apri l'applicazione</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/static/js/wizard.js"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+services:
+  setup-wizard:
+    build:
+      context: ./wizard
+      dockerfile: Dockerfile
+    container_name: asset-setup-wizard
+    network_mode: host
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - .:/project
+    environment:
+      PROJECT_ROOT: /project

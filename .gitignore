@@ -1,0 +1,69 @@
+# Dependencies
+node_modules/
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Environment
+.env
+.venv
+env/
+venv/
+
+# Build
+dist/
+build/
+*.egg-info/
+
+# Data
+data/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Wizard-generated files (created at first install)
+docker-compose.yml
+backend/.env
+.initialized
+INSTALL_CONFIG.txt
+
+# Backup and secrets (never commit)
+*.bak
+backup/
+backups/
+secrets/
+
+# Database files
+data/db/
+
+# SSL certificates (generated per-install)
+data/ssl/
+
+# Compliance reports (generated per-run)
+data/compliance/
+
+# Internal documentation (not for public repo)
+03_CREDENZIALI_SISTEMA*.md
+HANDOFF_*.md
+IT_Asset_Manager_Session_Report*
+SYSTEM_INSTRUCTIONS*.md
+
+# PDF guides (generated, not tracked)
+*.pdf
+.mypy_cache/
+
+# Data files - contengono dati personali, mai committare
+backend/dotazione.csv
+backend/*.csv

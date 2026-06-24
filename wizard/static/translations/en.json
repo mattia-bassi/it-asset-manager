@@ -1,0 +1,131 @@
+{
+    "stepper": {
+        "network": "Network",
+        "database": "Database",
+        "admin": "Admin",
+        "summary": "Summary",
+        "install": "Install",
+        "complete": "Complete"
+    },
+    "common": {
+        "back": "Back",
+        "next": "Next",
+        "cancel": "Cancel",
+        "required": "This field is required"
+    },
+    "login": {
+        "title": "First-time Setup Login",
+        "description": "Enter the setup credentials from the official documentation.",
+        "username": "Username",
+        "password": "Password",
+        "submit": "Log in",
+        "error": "Invalid credentials. Please check the Installation Guide."
+    },
+    "network": {
+        "title": "Network Configuration",
+        "description": "Configure IP addresses for the services. Use automatic mode to detect your network.",
+        "info_title": "How does it work?",
+        "info_text": "The system uses a macvlan network to assign dedicated IPs to each service. Each component will be reachable as a physical device on your network.",
+        "mode_auto": "Automatic",
+        "mode_manual": "Manual",
+        "auto_detected": "Network detected automatically",
+        "interface": "Network Interface",
+        "subnet": "Subnet",
+        "gateway": "Gateway",
+        "ip_app": "Application IP",
+        "ip_db": "Database IP",
+        "ip_redis": "Cache IP (Redis)",
+        "port": "Application Port",
+        "protocol": "Protocol",
+        "error_required": "Required",
+        "error_ip": "Invalid IP address",
+        "error_subnet": "Invalid subnet format (e.g. 10.0.0.0/24)",
+        "error_port": "Port must be between 1024 and 65535",
+        "error_duplicate": "Each service must have a unique IP",
+        "error_ip_in_use": "This address is already in use by another device"
+    },
+    "database": {
+        "title": "Database Credentials",
+        "description": "Configure database name, application user and administration passwords.",
+        "info_title": "What are you configuring?",
+        "info_text": "MariaDB stores all application data. The application user has limited access to the database only, while the root user is reserved for administration.",
+        "db_name": "Database Name",
+        "db_user": "Application User",
+        "db_password": "Application User Password",
+        "root_password": "Root (Administrator) Password",
+        "error_name": "At least 2 characters",
+        "error_user": "At least 2 characters",
+        "error_password": "Password does not meet requirements",
+        "error_root_password": "Password does not meet requirements",
+        "error_same_password": "Root password must differ from application password"
+    },
+    "admin": {
+        "title": "Administrator Account",
+        "description": "Create the first administrator account to access the system.",
+        "first_name": "First Name",
+        "last_name": "Last Name",
+        "email": "Email",
+        "username": "Username",
+        "password_label": "Password",
+        "password_confirm": "Confirm Password",
+        "password": "Password",
+        "error_firstname": "At least 2 characters",
+        "error_lastname": "At least 2 characters",
+        "error_email": "Invalid email",
+        "error_username": "Min 4 chars, letters/numbers/dots/underscores",
+        "error_weak_password": "Password does not meet requirements",
+        "error_password_mismatch": "Passwords do not match"
+    },
+    "password": {
+        "min_length": "Min 12 characters",
+        "uppercase": "Uppercase",
+        "lowercase": "Lowercase",
+        "number": "Number",
+        "symbol": "Symbol",
+        "weak": "Weak",
+        "medium": "Medium",
+        "strong": "Strong"
+    },
+    "summary": {
+        "title": "Configuration Summary",
+        "description": "Review the data before starting installation. You can go back to make changes.",
+        "section_network": "Network",
+        "section_database": "Database",
+        "section_admin": "Administrator",
+        "url": "Access URL",
+        "include_password": "Include password in document",
+        "download": "Download configuration document",
+        "start_install": "Start Installation",
+        "confirm_title": "Confirm installation",
+        "confirm_text": "You are about to start the installation. Docker containers will be created and configured. Do you want to proceed?",
+        "confirm_start": "Confirm and Install"
+    },
+    "install": {
+        "title": "Installation in progress",
+        "preparing": "Preparing...",
+        "log_title": "Installation log",
+        "error_title": "Error during installation",
+        "retry": "Retry",
+        "log_init": "Initializing installation...",
+        "log_init_ok": "Initialization complete",
+        "log_init_fail": "Initialization error",
+        "log_complete": "🎉 Installation completed successfully!",
+        "log_retry": "Retrying from failed step...",
+        "log_connection_error": "Connection error"
+    },
+    "complete": {
+        "title": "Installation complete!",
+        "description": "The system is ready to use. Log in with the credentials created during configuration.",
+        "url": "Address",
+        "username": "Username",
+        "open_app": "Open application"
+    },
+    "document": {
+        "title": "SYSTEM CONFIGURATION",
+        "confidential": "CONFIDENTIAL — Store securely",
+        "install_date": "Installation date",
+        "version": "Application version",
+        "full_name": "Full name",
+        "not_included": "not included"
+    }
+}

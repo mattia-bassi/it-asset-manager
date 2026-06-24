@@ -1,0 +1,468 @@
+/* ============================================
+   IT ASSET MANAGER — BOOTSTRAP WIZARD
+   Framework CSS v2.0
+   ============================================ */
+
+/* --- CSS Variables --- */
+:root {
+    --wizard-primary: #2563eb;
+    --wizard-primary-hover: #1d4ed8;
+    --wizard-primary-light: #eff6ff;
+    --wizard-success: #16a34a;
+    --wizard-success-light: #f0fdf4;
+    --wizard-danger: #dc2626;
+    --wizard-danger-light: #fef2f2;
+    --wizard-warning: #d97706;
+    --wizard-warning-light: #fffbeb;
+    --wizard-gray-50: #f9fafb;
+    --wizard-gray-100: #f3f4f6;
+    --wizard-gray-200: #e5e7eb;
+    --wizard-gray-300: #d1d5db;
+    --wizard-gray-400: #9ca3af;
+    --wizard-gray-500: #6b7280;
+    --wizard-gray-600: #4b5563;
+    --wizard-gray-700: #374151;
+    --wizard-gray-800: #1f2937;
+    --wizard-gray-900: #111827;
+    --wizard-bg: #f0f4f8;
+    --wizard-card-bg: #ffffff;
+    --wizard-card-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+    --wizard-card-radius: 16px;
+    --wizard-input-radius: 8px;
+    --wizard-transition: 0.2s ease;
+    --wizard-max-width: 720px;
+    --wizard-font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* --- Reset & Base --- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+body {
+    font-family: var(--wizard-font);
+    background: var(--wizard-bg);
+    color: var(--wizard-gray-800);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+/* --- Container --- */
+.wizard-container {
+    width: 100%;
+    max-width: var(--wizard-max-width);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* --- Stepper --- */
+.wizard-stepper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 32px;
+    width: 100%;
+    padding: 0 20px;
+}
+.wizard-stepper .step {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.wizard-stepper .step-number {
+    width: 36px; height: 36px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.875rem; font-weight: 600;
+    border: 2px solid var(--wizard-gray-300);
+    color: var(--wizard-gray-400);
+    background: var(--wizard-card-bg);
+    transition: all var(--wizard-transition);
+    flex-shrink: 0;
+}
+.wizard-stepper .step.active .step-number {
+    border-color: var(--wizard-primary); background: var(--wizard-primary); color: #fff;
+}
+.wizard-stepper .step.completed .step-number {
+    border-color: var(--wizard-success); background: var(--wizard-success); color: #fff;
+}
+.wizard-stepper .step-label {
+    font-size: 0.75rem; font-weight: 500; color: var(--wizard-gray-400);
+    white-space: nowrap; transition: color var(--wizard-transition);
+}
+.wizard-stepper .step.active .step-label { color: var(--wizard-primary); font-weight: 600; }
+.wizard-stepper .step.completed .step-label { color: var(--wizard-success); }
+.wizard-stepper .step-connector {
+    flex: 1; height: 2px; background: var(--wizard-gray-200);
+    margin: 0 12px; min-width: 24px; transition: background var(--wizard-transition);
+}
+.wizard-stepper .step-connector.completed { background: var(--wizard-success); }
+
+/* --- Card --- */
+.wizard-card {
+    background: var(--wizard-card-bg);
+    border-radius: var(--wizard-card-radius);
+    box-shadow: var(--wizard-card-shadow);
+    width: 100%;
+    max-width: var(--wizard-max-width);
+    padding: 40px;
+    animation: fadeIn 0.3s ease;
+}
+.wizard-card.centered { text-align: center; }
+.wizard-card h2 {
+    font-size: 1.375rem; font-weight: 700; color: var(--wizard-gray-900);
+    margin-bottom: 8px; letter-spacing: -0.01em;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Logo (Step 0) --- */
+.wizard-logo { margin-bottom: 32px; }
+.wizard-logo h1 {
+    font-size: 1.75rem; font-weight: 700; color: var(--wizard-gray-900); letter-spacing: -0.02em;
+}
+.wizard-logo .subtitle {
+    font-size: 0.875rem; color: var(--wizard-gray-500); margin-top: 4px;
+}
+
+/* --- Text --- */
+.wizard-text {
+    font-size: 0.9375rem; color: var(--wizard-gray-500); margin-bottom: 24px;
+}
+
+/* --- Language Buttons (Step 0) --- */
+.language-buttons {
+    display: flex; gap: 20px; justify-content: center; margin-top: 32px;
+}
+.btn-language {
+    display: flex; flex-direction: column; align-items: center; gap: 12px;
+    padding: 32px 48px;
+    border: 2px solid var(--wizard-gray-200);
+    border-radius: var(--wizard-card-radius);
+    background: var(--wizard-card-bg);
+    cursor: pointer; transition: all var(--wizard-transition);
+    font-family: var(--wizard-font); font-size: 1rem; font-weight: 600;
+    color: var(--wizard-gray-700);
+}
+.btn-language:hover {
+    border-color: var(--wizard-primary);
+    box-shadow: 0 4px 16px rgba(37, 99, 235, 0.12);
+    transform: translateY(-2px);
+}
+
+/* --- Info Box --- */
+.wizard-info-box {
+    background: var(--wizard-primary-light);
+    border-left: 4px solid var(--wizard-primary);
+    border-radius: 0 var(--wizard-input-radius) var(--wizard-input-radius) 0;
+    padding: 16px 20px; margin-bottom: 24px;
+    font-size: 0.875rem; line-height: 1.7; color: var(--wizard-gray-700);
+}
+.wizard-info-box h4 {
+    font-size: 0.875rem; font-weight: 600; color: var(--wizard-primary); margin-bottom: 8px;
+}
+.wizard-info-box p { margin: 0; }
+
+/* --- Toggle Group (Auto/Manual) --- */
+.toggle-group {
+    display: flex; background: var(--wizard-gray-100);
+    border-radius: var(--wizard-input-radius); padding: 4px;
+    margin-bottom: 24px; width: fit-content;
+}
+.toggle-btn {
+    padding: 8px 20px; border: none; border-radius: 6px;
+    font-size: 0.875rem; font-weight: 500; font-family: var(--wizard-font);
+    cursor: pointer; background: transparent; color: var(--wizard-gray-500);
+    transition: all var(--wizard-transition);
+}
+.toggle-btn.active {
+    background: var(--wizard-card-bg); color: var(--wizard-primary);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Status message --- */
+.wizard-status {
+    display: flex; align-items: center; gap: 8px;
+    padding: 12px 16px; background: var(--wizard-success-light);
+    border-radius: var(--wizard-input-radius); margin-bottom: 20px;
+    font-size: 0.875rem; color: var(--wizard-success);
+}
+
+/* --- Form --- */
+.wizard-form { margin-top: 8px; }
+.form-row {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;
+}
+.form-group { margin-bottom: 16px; }
+.form-group label {
+    display: block; font-size: 0.875rem; font-weight: 600;
+    color: var(--wizard-gray-700); margin-bottom: 6px;
+}
+
+/* --- Inputs --- */
+.wizard-input, select.wizard-input {
+    width: 100%; padding: 10px 14px;
+    border: 1.5px solid var(--wizard-gray-300);
+    border-radius: var(--wizard-input-radius);
+    font-size: 0.9375rem; font-family: var(--wizard-font);
+    color: var(--wizard-gray-800); background: var(--wizard-card-bg);
+    transition: border-color var(--wizard-transition), box-shadow var(--wizard-transition);
+    outline: none;
+}
+.wizard-input:focus { border-color: var(--wizard-primary); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12); }
+.wizard-input.error { border-color: var(--wizard-danger); box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.08); }
+.wizard-input.success { border-color: var(--wizard-success); }
+.wizard-input::placeholder { color: var(--wizard-gray-400); }
+
+/* --- Field Error --- */
+.field-error {
+    font-size: 0.8125rem; color: var(--wizard-danger); margin-top: 4px; display: none;
+}
+.field-error.visible { display: block; }
+
+/* --- Inline Error (login) --- */
+.wizard-error {
+    background: var(--wizard-danger-light); color: var(--wizard-danger);
+    padding: 12px 16px; border-radius: var(--wizard-input-radius);
+    font-size: 0.875rem; margin-bottom: 16px;
+}
+
+/* --- Error Box (install) --- */
+.wizard-error-box {
+    background: var(--wizard-danger-light);
+    border-left: 4px solid var(--wizard-danger);
+    border-radius: 0 var(--wizard-input-radius) var(--wizard-input-radius) 0;
+    padding: 16px 20px; margin-top: 24px;
+    font-size: 0.875rem; line-height: 1.7; color: var(--wizard-gray-700);
+}
+.wizard-error-box h4 { color: var(--wizard-danger); margin-bottom: 8px; }
+.wizard-error-box p { margin-bottom: 12px; word-break: break-word; }
+
+/* --- Password Strength --- */
+.wizard-password-strength {
+    height: 4px; border-radius: 2px; margin-top: 8px;
+    background: var(--wizard-gray-200); transition: background var(--wizard-transition);
+}
+.wizard-password-strength.weak { background: linear-gradient(to right, var(--wizard-danger) 33%, var(--wizard-gray-200) 33%); }
+.wizard-password-strength.medium { background: linear-gradient(to right, var(--wizard-warning) 66%, var(--wizard-gray-200) 66%); }
+.wizard-password-strength.strong { background: var(--wizard-success); }
+
+.wizard-password-strength-label { font-size: 0.75rem; margin-top: 4px; display: inline-block; }
+.wizard-password-strength-label.weak { color: var(--wizard-danger); }
+.wizard-password-strength-label.medium { color: var(--wizard-warning); }
+.wizard-password-strength-label.strong { color: var(--wizard-success); }
+
+/* --- Password Checklist --- */
+.wizard-password-checklist { margin-top: 8px; font-size: 0.8125rem; }
+.wizard-password-checklist .check-item {
+    display: flex; align-items: center; gap: 6px; padding: 2px 0;
+    color: var(--wizard-gray-400); transition: color var(--wizard-transition);
+}
+.wizard-password-checklist .check-item.passed { color: var(--wizard-success); }
+.wizard-password-checklist .check-item::before { content: "○"; font-size: 0.75rem; }
+.wizard-password-checklist .check-item.passed::before { content: "●"; }
+
+/* --- Navigation --- */
+.wizard-nav {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--wizard-gray-200);
+}
+
+/* --- Buttons --- */
+.btn-primary, .btn-secondary, .btn-outline {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 24px; border: none; border-radius: var(--wizard-input-radius);
+    font-size: 0.9375rem; font-weight: 600; font-family: var(--wizard-font);
+    cursor: pointer; transition: all var(--wizard-transition); text-decoration: none;
+}
+.btn-primary {
+    background: var(--wizard-primary); color: #fff;
+}
+.btn-primary:hover {
+    background: var(--wizard-primary-hover); transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+}
+.btn-secondary {
+    background: transparent; color: var(--wizard-gray-600);
+    border: 1.5px solid var(--wizard-gray-300);
+}
+.btn-secondary:hover { background: var(--wizard-gray-50); border-color: var(--wizard-gray-400); }
+.btn-outline {
+    background: transparent; color: var(--wizard-primary);
+    border: 1.5px solid var(--wizard-primary);
+}
+.btn-outline:hover { background: var(--wizard-primary-light); }
+.btn-install { padding: 14px 32px; font-size: 1rem; }
+
+/* --- Summary --- */
+.wizard-summary { margin-bottom: 24px; }
+.wizard-summary-section { margin-bottom: 20px; }
+.wizard-summary-section h3 {
+    font-size: 0.8125rem; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.05em; color: var(--wizard-gray-400);
+    margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--wizard-gray-200);
+}
+.wizard-summary-row {
+    display: flex; justify-content: space-between; padding: 8px 0; font-size: 0.9375rem;
+}
+.wizard-summary-row .label { color: var(--wizard-gray-500); }
+.wizard-summary-row .value {
+    font-weight: 600; color: var(--wizard-gray-800);
+    font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace; font-size: 0.875rem;
+}
+.wizard-summary-actions {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 16px; flex-wrap: wrap; gap: 12px;
+}
+.checkbox-label {
+    display: flex; align-items: center; gap: 8px; font-size: 0.875rem;
+    color: var(--wizard-gray-700); cursor: pointer;
+}
+.checkbox-label input[type="checkbox"] {
+    width: 18px; height: 18px; accent-color: var(--wizard-primary); cursor: pointer;
+}
+
+/* --- Modal --- */
+.wizard-modal {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 1000; opacity: 0; visibility: hidden;
+    transition: all var(--wizard-transition);
+}
+.wizard-modal.visible { opacity: 1; visibility: visible; }
+.modal-content {
+    background: var(--wizard-card-bg); border-radius: var(--wizard-card-radius);
+    padding: 32px; max-width: 480px; width: 90%;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+    transform: scale(0.95); transition: transform var(--wizard-transition);
+}
+.wizard-modal.visible .modal-content { transform: scale(1); }
+.modal-content h3 { font-size: 1.125rem; font-weight: 700; color: var(--wizard-gray-900); margin-bottom: 12px; }
+.modal-content p { font-size: 0.9375rem; color: var(--wizard-gray-600); margin-bottom: 24px; line-height: 1.6; }
+.modal-actions { display: flex; justify-content: flex-end; gap: 12px; }
+
+/* --- Installation Progress (Step 6) --- */
+.install-progress { margin-bottom: 24px; }
+.install-progress-bar {
+    width: 100%; height: 8px; background: var(--wizard-gray-200);
+    border-radius: 4px; overflow: hidden;
+}
+.install-progress-fill {
+    height: 100%; background: var(--wizard-primary); border-radius: 4px;
+    transition: width 0.5s ease;
+    background-image: linear-gradient(-45deg,
+        rgba(255,255,255,0.15) 25%, transparent 25%, transparent 50%,
+        rgba(255,255,255,0.15) 50%, rgba(255,255,255,0.15) 75%, transparent 75%, transparent);
+    background-size: 40px 40px;
+    animation: progressStripes 1s linear infinite;
+}
+@keyframes progressStripes {
+    0% { background-position: 40px 0; }
+    100% { background-position: 0 0; }
+}
+.install-progress-info {
+    display: flex; justify-content: space-between;
+    font-size: 0.8125rem; color: var(--wizard-gray-500); margin-top: 8px;
+}
+
+/* --- Install Steps List --- */
+.install-steps-list {
+    max-height: 280px; overflow-y: auto;
+    border: 1px solid var(--wizard-gray-200); border-radius: var(--wizard-input-radius);
+    margin-bottom: 24px;
+}
+.install-step-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 16px; border-bottom: 1px solid var(--wizard-gray-100);
+    font-size: 0.875rem; transition: background var(--wizard-transition);
+}
+.install-step-row:last-child { border-bottom: none; }
+.install-step-row.running { background: var(--wizard-primary-light); }
+.install-step-row.success { background: var(--wizard-success-light); }
+.install-step-row.error { background: var(--wizard-danger-light); }
+.install-step-number {
+    width: 28px; height: 28px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.75rem; font-weight: 600;
+    background: var(--wizard-gray-100); color: var(--wizard-gray-500);
+    flex-shrink: 0;
+}
+.install-step-row.running .install-step-number { background: var(--wizard-primary); color: #fff; }
+.install-step-row.success .install-step-number { background: var(--wizard-success); color: #fff; }
+.install-step-row.error .install-step-number { background: var(--wizard-danger); color: #fff; }
+.install-step-name { flex: 1; color: var(--wizard-gray-700); }
+.install-step-status { flex-shrink: 0; font-size: 1rem; }
+
+/* --- Install Log --- */
+.install-log-container { margin-bottom: 24px; }
+.install-log-container h4 {
+    font-size: 0.8125rem; font-weight: 600; color: var(--wizard-gray-500);
+    margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.05em;
+}
+.install-log {
+    background: var(--wizard-gray-900); color: #e2e8f0;
+    border-radius: var(--wizard-input-radius); padding: 20px;
+    font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+    font-size: 0.8125rem; line-height: 1.8;
+    max-height: 240px; overflow-y: auto;
+}
+.install-log .log-entry { display: flex; gap: 8px; padding: 2px 0; }
+.install-log .log-time { color: var(--wizard-gray-400); flex-shrink: 0; }
+.install-log .log-icon { flex-shrink: 0; width: 16px; text-align: center; }
+.install-log .log-entry.success { color: #4ade80; }
+.install-log .log-entry.error { color: #f87171; }
+
+/* --- Completion (Step 7) --- */
+.completion-icon { font-size: 4rem; margin-bottom: 24px; }
+.completion-details {
+    background: var(--wizard-gray-50); border: 1px solid var(--wizard-gray-200);
+    border-radius: var(--wizard-input-radius); padding: 24px;
+    margin: 24px 0; text-align: left;
+}
+.completion-row {
+    display: flex; justify-content: space-between; padding: 8px 0;
+    font-size: 0.9375rem;
+}
+.completion-row .label { color: var(--wizard-gray-500); }
+.completion-row .value, .completion-row a {
+    font-weight: 600; color: var(--wizard-primary);
+    font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace; font-size: 0.875rem;
+    text-decoration: none;
+}
+.completion-row a:hover { text-decoration: underline; }
+.completion-actions { margin-top: 32px; }
+
+/* --- Shake Animation --- */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-6px); }
+    40%, 80% { transform: translateX(6px); }
+}
+
+/* --- Responsive --- */
+@media (max-width: 640px) {
+    body { padding: 20px 12px; }
+    .wizard-card { padding: 24px 20px; border-radius: 12px; }
+    .form-row { grid-template-columns: 1fr; }
+    .wizard-stepper .step-label { display: none; }
+    .wizard-stepper .step-connector { min-width: 16px; margin: 0 6px; }
+    .language-buttons { flex-direction: column; align-items: center; }
+    .btn-language { width: 100%; max-width: 280px; padding: 24px; }
+    .wizard-nav { flex-direction: column-reverse; gap: 12px; }
+    .wizard-nav button { width: 100%; justify-content: center; }
+    .wizard-summary-row { flex-direction: column; gap: 2px; }
+    .wizard-summary-actions { flex-direction: column; }
+    .completion-row { flex-direction: column; gap: 4px; }
+}
+@media (max-width: 480px) {
+    .wizard-stepper .step-number { width: 28px; height: 28px; font-size: 0.75rem; }
+}
+
+/* --- Utility --- */
+.hidden { display: none !important; }
